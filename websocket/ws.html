@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+   <meta charset="utf-8">
+   <title>菜鳥教程(runoob.com)</title>
+    
+      <script type="text/javascript">
+         function WebSocketTest()
+         {
+            if ("WebSocket" in window)
+            {
+               alert("您的瀏覽器支持 WebSocket!");
+               
+               // 打開一個 web socket
+               var ws = new WebSocket("ws://172.16.63.1:2019/");
+                
+               ws.onopen = function()
+               {
+                  // Web Socket 已連接上，使用 send() 方法發送數據
+                  //ws.send("發送數據");
+                  //alert("數據發送中...");
+
+                  //web.config add  //connect-src 'self' ws:
+                  //<add name="Content-Security-Policy" value="default-src 'self';connect-src 'self' ws:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';frame-src 'self' http://maps.google.com.tw/ https://www.google.com/; " />
+               };
+                
+               ws.onmessage = function (evt) 
+               { 
+                  var received_msg = evt.data;
+                  document.getElementById("message").innerHTML=received_msg;
+
+                  //set title   
+                  document.title = received_msg;
+                  
+                  //alert("數據已接收...");
+               };
+                
+               ws.onclose = function()
+               { 
+                  // 關閉 websocket
+                  alert("連接已關閉..."); 
+               };
+            }
+            
+            else
+            {
+               // 瀏覽器不支持 WebSocket
+               alert("您的瀏覽器不支持 WebSocket!");
+            }
+         }
+      </script>
+        
+   </head>
+   <body>
+   
+      <div id="sse">
+         <a href="javascript:WebSocketTest()">運行 WebSocket</a>
+      </div>
+      
+      <div>
+        <h1 id="message">Hello WebSocket...</h1>
+            
+      </div>
+   </body>
+</html>
